@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+      .bold {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Students</h1>
+    <% for(let i=0; i<students.length; i++) { 
+        let student = students[i]
+    %>
+      <li><span class="bold">Name:</span> <%= student.name %>, Program: <%= student.program %></li>
+    <% 
+     } 
+     %>
+  </body>
+</html>

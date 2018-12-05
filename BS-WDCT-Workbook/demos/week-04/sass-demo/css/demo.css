@@ -1,0 +1,15 @@
+.container {
+  padding: 10px;
+}
+.container h1 {
+  font-family: Helvetica, sans-serif;
+  color: blue;
+}
+
+.error {
+  border: solid 1px blue;
+}
+
+.bold {
+  font-weight: bold;
+}

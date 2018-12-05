@@ -1,0 +1,19 @@
+$fonts: Helvetica, sans-serif;
+$headerColor: blue;
+
+.container {
+  padding: 10px;
+  h1 {
+    font-family: $fonts;
+    color: $headerColor;
+  }
+}
+
+
+.error {
+  border: solid 1px $headerColor;
+}
+
+.bold {
+  font-weight: bold;
+}

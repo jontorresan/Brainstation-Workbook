@@ -1,0 +1,28 @@
+<% 
+console.log(user) 
+console.log(greetings)
+
+for(let i=0; i<greetings.length; i++) {
+  console.log(greetings[i], user )
+}
+
+console.log(printHello())
+
+%>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Some Greetings:</h1>
+    <ul>
+      <% for(let i=0; i<greetings.length; i++) { %>
+        <li><%= greetings[i] %> <%= user%></li>
+      <% } %>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
+  <script src="guessing-game.js" type="text/javascript"></script>
+  <script>
+    const fadeInTime = 600
+    const fadeOutTime = 200
+    const gameState = {
+      userName: '',
+      difficulty: 0,
+      max: 0,
+      guess: 0,
+      goal: 0,
+      turn: 0
+    }
+
+    $(function () {
+      $('#message').hide()
+      $('#enterUserName').hide()
+      $('#enterMaxNumber').hide()
+      $('#enterGuess').hide()
+      $('#enterUserName').fadeIn(fadeInTime)
+
+      $('#userNameAndDifficultyForm').submit(function (event) {
+        event.preventDefault()
+        gameState.userName = $('#userNameAndDifficultyForm :input[name="username"]').val()
+        gameState.difficulty = 8 - Number($('#userNameAndDifficultyForm :input[name="difficulty"]').val())
+        $('#enterUserName').fadeOut(fadeOutTime, function () {
+          displayMessage(`Welcome ${gameState.userName}! You will have ${gameState.difficulty} tries to guess the number.`)
+          $('#enterMaxNumber').fadeIn(fadeInTime)
+        })
+      })
+
+      $('#userMaxNumberForm').submit(function (event) {
+        event.preventDefault()
+        gameState.max = Number($('#userMaxNumberForm :input[name="max"]').val())
+        gameState.goal = generateRandomNumber(gameState.max)
+
+        $('#userMaxNumberForm :input[name="max"]').val('')
+        $('#enterMaxNumber').fadeOut(function(event) {
+          displayMessage(`Ok, I'm going to pick a number between 1 and ${gameState.max}. Can you guess what it is?`)
+          $("#enterGuess").fadeIn(fadeInTime)
+        })
+      })
+
+      $('#userGuessForm').submit(function (event) {
+        event.preventDefault()
+        gameState.turn++
+        gameState.guess = Number($('#userGuessForm :input[name="guess"]').val())
+
+        let correct = isGuessCorrect(gameState.goal, gameState.guess)
+
+        console.log(gameState.goal, gameState.guess, correct, gameState.turn, gameState.difficulty)
+
+        if(correct !== 'correct' && gameState.turn < gameState.difficulty) {
+          displayMessage(`${guessResultMessage(correct)}You have ${gameState.difficulty - gameState.turn} turns left.`)
+          $('#userGuessForm :input[name="guess"]').val('')
+        } else if (gameState.turn === gameState.difficulty) {
+          $('#enterGuess').fadeOut(fadeOutTime, function() {
+            displayMessage(`Sorry ${gameState.userName}! You Lose.`)
+          })
+        } else {
+          $('#enterGuess').fadeOut(fadeOutTime, function() {
+            displayMessage(`Great job ${gameState.userName}! You Win!`)
+          })
+        }
+      })
+    })
+
+    function displayMessage(msg) {
+      $('#gameMessage').text(msg)
+      $('#message').fadeIn(fadeInTime)
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Number Guessing Game</h1>
+    <div id="message">
+        <label id="gameMessage"></label>
+      </div>
+    <div id="enterUserName">
+      <form id="userNameAndDifficultyForm">
+        <div class="form-group">
+          <label>Please Enter Your Name:</label>
+          <input type="text" name="username" class="form-control" placeholder="Enter Your Name" />
+        </div>
+        <div class="form-group">
+          <label>Please Enter a Difficulty Level:</label>
+          <select name="difficulty" class="form-control">
+            <option value="1">Level 1</option>
+            <option value="2">Level 2</option>
+            <option value="3">Level 3</option>
+            <option value="4">Level 4</option>
+            <option value="5">Level 5</option>
+          </select>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <div id="enterMaxNumber">
+      <form id="userMaxNumberForm">
+        <div class="form-group">
+          <label>Please enter a maximum number for guessing:</label>
+          <input type="text" name="max" class="form-control" />
+        </div>
+        <button class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <div id="enterGuess">
+      <form id="userGuessForm">
+        <div class="form-group">
+          <label>What's your guess?</label>
+          <input type="text" name="guess" class="form-control" />
+        </div>
+        <button class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

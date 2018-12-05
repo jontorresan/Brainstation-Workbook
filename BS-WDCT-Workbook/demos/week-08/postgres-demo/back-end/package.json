@@ -1,0 +1,19 @@
+{
+  "name": "postgres-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bookshelf": "^0.13.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "knex": "^0.15.2",
+    "pg": "^7.6.1"
+  }
+}

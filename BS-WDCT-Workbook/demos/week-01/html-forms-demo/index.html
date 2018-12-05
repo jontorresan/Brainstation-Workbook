@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <h1>Form Demo</h1>
+
+  <form action="http://localhost:3000/login" method="GET">
+    <div>
+    Username: <input type="text" name="username" id="username" />
+  </div>
+  <div>
+    Email: <input type="email" name="email" id="email" />
+  </div>
+  <div>
+    Password: <input type="password" name="password" id="password" />
+  </div>
+  <div>
+    <button id="submitButton" type="button">Submit</button>
+  </div>
+  </form>
+
+  <div>
+    <h2>You Typed:</h2>
+    <div id="typedName">
+    </div>
+    <div id="typedEmail">
+      </div>
+  </div>
+  <script>
+    $('#password').keyup(handlePassword)
+
+    function handlePassword() {
+      console.log($('#password').val())
+    }
+
+    $('#submitButton').click(handleSubmit)
+
+    function handleSubmit() {
+      var username = $('#username').val()
+      console.log(username)
+
+      var email = $('#email').val()
+      console.log(email)
+
+      $('#typedName').html(username)
+      $('#typedEmail').html(email)
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<% include partials/header %>
+<% if(!movie) { %>
+  <h1>Error...Movie Does Not exist.</h1>
+<% }  else { %> 
+    <h1><%= movie.title %></h1>
+    <div class="row">
+      <div class="col-3">
+        <img src="<%= getPosterUrl(movie.poster_path) %>" class="img-fluid" />
+      </div>
+      <div class="col-9">
+        <ul>
+        <% 
+          const keys = Object.keys(movie)
+          for(let i=0; i<keys.length; i++) {
+        %>    
+          <li><%= keys[i] %>: <%= movie[keys[i]] %></li>
+        <% } %>
+        </ul>
+      </div>
+    </div>
+<% } %> 
+<% include partials/footer %>

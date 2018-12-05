@@ -1,0 +1,10 @@
+  <% include partials/header %>
+  <div>
+    <h2>Friends</h2>
+    <ul>
+      <% for(let i=0; i<user.friends.length; i++) { %>
+        <% include partials/friendComponent %>
+      <% } %>
+    </ul>
+  </div>
+  <% include partials/footer %>
